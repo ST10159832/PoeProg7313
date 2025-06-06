@@ -1,198 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"> <!-- Light gray background -->
+    android:background="#0D2B4C"
+    tools:context=".FundsFragment">
 
+    <!-- Scrollable Content -->
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/bottomNavigationView"
-        android:fillViewport="true">
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView">
 
         <LinearLayout
+            android:id="@+id/contentLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="24dp">
 
-            <!-- Money Section -->
+            <!-- Section Title -->
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MONEY"
-                android:textColor="#000000"
-                android:textSize="18sp"
+                android:text="Money Overview"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="16dp"/>
+                android:textColor="#FFFFFF"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp" />
 
-            <!-- Graph Placeholder -->
+            <!-- Bar Chart -->
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barChart"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:layout_marginBottom="24dp"
-                android:background="#FFFFFF"/>
+                android:background="#1E4D8B"
+                android:layout_marginBottom="24dp" />
 
-            <!-- Month Section -->
+            <!-- Budget Overview Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#1E4D8B"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Current Budget"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvCurrentBudget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="R 0"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Income & Expenses List Title -->
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MONTH"
-                android:textColor="#000000"
-                android:textSize="18sp"
+                android:text="Income and Expenses"
+                android:textColor="#FFFFFF"
                 android:textStyle="bold"
-                android:layout_marginBottom="16dp"
-                android:gravity="center"/>
-
-            <!-- Current Wallet Section -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="CURRENT WALLET"
-                android:textColor="#000000"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="12dp" />
 
-            <!-- Current Wallet Amount -->
+            <!-- Entry List Container (Dynamic Entries Will Be Added Here) -->
             <LinearLayout
+                android:id="@+id/entryList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="24dp"
-                android:background="#FFFFFF"
-                android:padding="16dp"
-                android:elevation="4dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="BALANCE"
-                    android:textColor="#000000"
-                    android:textSize="16sp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="R 40 000.00"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp">
+                <!-- Dynamically added cards go here -->
             </LinearLayout>
 
-            <!-- Add Account Section -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ADD ACCOUNT"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp"/>
-
-            <!-- Bank Account Option -->
-            <LinearLayout
-                android:id="@+id/bankAccountOption"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="16dp"
-                android:background="#FFFFFF"
-                android:padding="16dp"
-                android:elevation="4dp"
-                android:clickable="true"
-                android:foreground="?attr/selectableItemBackground">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="$"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    android:layout_marginEnd="16dp"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="BANK ACCOUNT"
-                    android:textColor="#000000"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-
-            <!-- Crypto Account Option -->
-            <LinearLayout
-                android:id="@+id/cryptoAccountOption"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="16dp"
-                android:background="#FFFFFF"
-                android:padding="16dp"
-                android:elevation="4dp"
-                android:clickable="true"
-                android:foreground="?attr/selectableItemBackground">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="B"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    android:layout_marginEnd="16dp"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="CRYPTO ACCOUNT"
-                    android:textColor="#000000"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-
-            <!-- Electronic Account Option -->
-            <LinearLayout
-                android:id="@+id/electronicAccountOption"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="#FFFFFF"
-                android:padding="16dp"
-                android:elevation="4dp"
-                android:clickable="true"
-                android:foreground="?attr/selectableItemBackground">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pay"
-                    android:textColor="#000000"
-                    android:textSize="20sp"
-                    android:layout_marginEnd="16dp"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="ELECTRONIC ACCOUNT"
-                    android:textColor="#000000"
-                    android:textSize="16sp"/>
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <!-- Material Bottom Navigation -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
+    <include
+        layout="@layout/bottom_nav"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#1E4D8B"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        app:menu="@menu/bottom_nav_menu"/>
-</RelativeLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
